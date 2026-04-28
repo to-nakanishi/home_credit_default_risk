@@ -1,5 +1,8 @@
 FROM public.ecr.aws/lambda/python:3.12
 
+RUN dnf install -y libgomp && \
+    dnf clean all
+
 RUN pip install --no-cache-dir --only-binary :all: \
     lightgbm==4.3.0 \
     numpy \
