@@ -1,62 +1,57 @@
-name: Deploy to AWS Lambda
+import json
+import pickle
+import os
+import boto3
+import numpy as np
 
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'deploy/**'
-  workflow_dispatch:
+model = None
+feature_names = None
 
-env:
-  AWS_REGION: ap-northeast-1
-  ECR_REPOSITORY: home-credit-predictor
-  LAMBDA_FUNCTION: home-credit-predictor
+BUCKET_NAME = os.environ.get('MODEL_BUCKET', 'my-home-credit-model-2026-tn')
+MODEL_KEY = os.environ.get('MODEL_KEY', 'models/lgbm_fold0.pkl')
+THRESHOLD = float(os.environ.get('THRESHOLD', '0.24'))
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+def load_model():
+    global model, feature_names
+    s3 = boto3.client('s3')
+    s3.download_file(BUCKET_NAME, MODEL_KEY, '/tmp/model.pkl')
+    with open('/tmp/model.pkl', 'rb') as f:
+        model = pickle.load(f)
+    feature_names = model.feature_name()
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push image to ECR
-        working-directory: deploy
-        run: |
-          IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}:latest
-          docker build -t $IMAGE_URI .
-          docker push $IMAGE_URI
-          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+def lambda_handler(event, context):
+    global model, feature_names
 
-      - name: Deploy Lambda function
-        run: |
-          # Image型Lambdaならupdate、zip型なら削除→再作成
-          PACKAGE_TYPE=$(aws lambda get-function-configuration \
-            --function-name ${{ env.LAMBDA_FUNCTION }} \
-            --query 'PackageType' --output text 2>/dev/null || echo "NOT_FOUND")
+    if model is None:
+        try:
+            load_model()
+        except Exception as e:
+            return {'statusCode': 500, 'body': json.dumps({'error': str(e)})}
 
-          if [ "$PACKAGE_TYPE" = "Image" ]; then
-            aws lambda update-function-code \
-              --function-name ${{ env.LAMBDA_FUNCTION }} \
-              --image-uri ${{ env.IMAGE_URI }}
-          else
-            aws lambda delete-function \
-              --function-name ${{ env.LAMBDA_FUNCTION }} 2>/dev/null || true
-            aws lambda create-function \
-              --function-name ${{ env.LAMBDA_FUNCTION }} \
-              --package-type Image \
-              --code ImageUri=${{ env.IMAGE_URI }} \
-              --role arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/home-credit-lambda-role \
-              --timeout 60 \
-              --memory-size 1024 \
-              --environment "Variables={MODEL_BUCKET=my-home-credit-model-2026-tn,MODEL_KEY=models/lgbm_fold0.pkl,THRESHOLD=0.24}"
-          fi
+    try:
+        if isinstance(event.get('body'), str):
+            body = json.loads(event['body'])
+        else:
+            body = event.get('body', event)
+        features = body.get('features', {})
+    except:
+        return {'statusCode': 400, 'body': json.dumps({'error': 'invalid request'})}
+
+    input_array = np.array(
+        [[features.get(name, 0) for name in feature_names]], dtype=np.float64
+    )
+    probability = float(model.predict(input_array)[0])
+    decision = "auto_approve" if probability < THRESHOLD else "manual_review"
+
+    return {
+        'statusCode': 200,
+        'headers': {'Content-Type': 'application/json'},
+        'body': json.dumps({
+            'probability': round(probability, 6),
+            'threshold': THRESHOLD,
+            'decision': decision,
+            'features_received': len(features)
+        })
+    }
