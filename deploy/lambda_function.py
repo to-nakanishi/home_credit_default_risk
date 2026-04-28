@@ -40,8 +40,8 @@ def lambda_handler(event, context):
         return {'statusCode': 400, 'body': json.dumps({'error': 'invalid request'})}
 
     input_array = np.array(
-        [[features.get(name, 0) for name in feature_names]], dtype=np.float64
-    )
+        [[features.get(name, np.nan) for name in feature_names]], dtype=np.float64
+    )    
     probability = float(model.predict(input_array)[0])
     decision = "auto_approve" if probability < THRESHOLD else "manual_review"
 
