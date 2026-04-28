@@ -1,11 +1,9 @@
-FROM public.ecr.aws/lambda/python:3.11
+FROM public.ecr.aws/lambda/python:3.12
 
-RUN yum install -y gcc gcc-c++ cmake libgomp && \
-    pip install --no-cache-dir \
+RUN pip install --no-cache-dir --only-binary :all: \
     lightgbm==4.3.0 \
     numpy \
-    scipy && \
-    yum clean all
+    scipy
 
 COPY lambda_function.py ${LAMBDA_TASK_ROOT}/
 
