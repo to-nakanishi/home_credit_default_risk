@@ -1,5 +1,6 @@
 
-**作成中**
+# 作成中
+
 # home_credit_default_risk: ローン申請の大規模データにおける債務不履行予測モデルの構築と審査最適化
 🔗 [Kaggle Competition Link]https://www.kaggle.com/c/home-credit-default-risk
 
