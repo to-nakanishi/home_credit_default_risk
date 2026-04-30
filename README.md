@@ -89,8 +89,8 @@
 ## 7. デプロイ構成、実行方法  
 【構成】  
  GitHub → GitHub Actions → ECR → Lambda ← S3(モデル)  
-                                   ↓  
-                            API Gateway → レスポンス(JSON)  
+ 　　　　　　　　　　　　　　　　　　　↓  
+ 　　　　　　　　　　　　　　　　API Gateway → レスポンス(JSON)  
 【実行手順】  
   curl -X POST \  
     https://{api-id}.execute-api.ap-northeast-1.amazonaws.com/prod/predict \  
