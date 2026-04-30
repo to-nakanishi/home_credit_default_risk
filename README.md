@@ -38,7 +38,7 @@
 2.リーク防止を一貫したTarget Encoding設計  
  -全てのTarget EncodingでOOF(Out-of-Fold) + Smoothingを適用し、テストデータへの情報漏洩を防止  
 3.モデル実装後の分析・ビジネスプランの検討・API化  
- -SHAP分析→閾値設計→コスト試算→運用フロー検討→AWS S3 + Lambda + API Gateway でデプロイ
+ -SHAP分析→閾値設計→運用フロー検討+コスト試算→AWS S3 + Lambda + API Gateway でデプロイ
 
 
 -返済予測に重要だと考えられる観点(返済能力・人物的評価・申告情報の整合性)に沿ってEDA・FEを実施  
