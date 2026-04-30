@@ -1,4 +1,22 @@
 
 
 # home_credit_default_risk: 大規模ローン申請データにおける債務不履行予測モデルの構築と審査最適化
-🔗 https://www.kaggle.com/c/home-credit-default-risk
+🔗 [Kaggle Competition Link]https://www.kaggle.com/c/home-credit-default-risk
+
+<br>
+
+## 1. プロジェクトの背景と目的
+銀行口座を持たない人々に対し、安心で快適な融資体験を提供することで、金融包摂の拡大を目指しています。こうした金融サービスが行き届いていない人々が満足のいく融資体験を得られるよう、Home Creditは通信事業者情報や取引情報など、さまざまな代替データを活用して**顧客の返済能力を予測**しています。
+
+<br>
+
+* **データ提供元**:Home Credit Group（銀行口座を持たない人々へ、安全かつポジティブな借り入れ体験を提供する国際的な消費者金融プロバイダー）
+* **主催**: Home Credit Group
+
+<br>
+
+## 2. アプローチの特徴
+1.FE設計における２本の柱(試走駆動、観点別)
+-Cleaningの段階で全７テーブルを集約・結合後にLGBM/CatBoostを試走して寄与度を確認し、それらに基づくEDA・FEを実施。
+-返済予測に重要だと考えられる観点(返済能力・人物的評価・申告情報の整合性)に沿ってEDA・FEを実施。
+2.
