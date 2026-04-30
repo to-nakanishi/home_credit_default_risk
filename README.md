@@ -66,7 +66,7 @@
 　-寄与度の高い特徴量同士は情報が重複し、合成しても精度向上に繋がらない場合がある。また細分化はサンプル不足による過学習を招くため、Coverage（被覆率）の確認が必要。 
 2.モデル運用  
 　- 正常Precisionを高めるとデフォルトPrecisionが低下し（閾値0.24時点で27.3%）、モデル単独での自動却下は非現実的。また正常Precisionの要求を高めるほど自動承認件数が減少し、モデル導入の効果が薄れる。これらのバランスから人間審査との組み合わせが前提となる。
-3.デプロイ 
+3.試験的デプロイ導入  
 　-AWSでのデプロイ及びGITHUBを用いたCI/CDの概要及び手順。また、zipデプロイの250MB制限。
 
 <br>
@@ -86,27 +86,27 @@
 
 <br>
 
-## 7. デプロイ構成、実行方法
-【構成】
- GitHub → GitHub Actions → ECR → Lambda ← S3(モデル)
-                                   ↓
-                            API Gateway → レスポンス(JSON)
-【実行手順】
-  curl -X POST \
-    https://{api-id}.execute-api.ap-northeast-1.amazonaws.com/prod/predict \
-    -H "Content-Type: application/json" \
-    -d '{"features": {"EXT_SOURCE_2": 0.5, "EXT_SOURCE_3": 0.3}}'
+## 7. デプロイ構成、実行方法  
+【構成】  
+ GitHub → GitHub Actions → ECR → Lambda ← S3(モデル)  
+                                   ↓  
+                            API Gateway → レスポンス(JSON)  
+【実行手順】  
+  curl -X POST \  
+    https://{api-id}.execute-api.ap-northeast-1.amazonaws.com/prod/predict \  
+    -H "Content-Type: application/json" \  
+    -d '{"features": {"EXT_SOURCE_2": 0.5, "EXT_SOURCE_3": 0.3}}'  
 
-  レスポンス例:
-    {
-      "probability": 0.073,
-      "threshold": 0.24,
-      "decision": "auto_approve",
-      "features_received": 2
-    }
+  レスポンス例:  
+    {  
+      "probability": 0.073,  
+      "threshold": 0.24,  
+      "decision": "auto_approve",  
+      "features_received": 2  
+    }  
 
-※APIの制約事項
-・現在のAPIはFE済みデータ（669特徴量）を入力とするデモ版であり、生の申請データからの推論には対応していない
-・テストコードではカテゴリ型特徴量が除外されており（669→631）、本来の予測精度より低下している
-・実運用では前処理パイプライン（特徴量生成・Target Encoding等）をLambda内またはStep Functionsで構築する必要がある
-・デプロイはLGBM Fold0単体での推論であり、アンサンブル構成（LGBM+CatBoost）の組み込みは未実装
+※APIの制約事項  
+・現在のAPIはFE済みデータ（669特徴量）を入力とするデモ版であり、生の申請データからの推論には対応していない  
+・テストコードではカテゴリ型特徴量が除外されており（669→631）、本来の予測精度より低下している  
+・実運用では前処理パイプライン（特徴量生成・Target Encoding等）をLambda内またはStep Functionsで構築する必要がある  
+・デプロイはLGBM Fold0単体での推論であり、アンサンブル構成（LGBM+CatBoost）の組み込みは未実装  
