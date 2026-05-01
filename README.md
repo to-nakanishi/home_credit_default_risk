@@ -34,6 +34,18 @@
 
 ## 3.ビジネスプラン：審査最適化の設計  
 【業務処理フロー】  
+graph TD
+    Start[申請受付] --> Model{モデルスコアリング<br>予測確率算出}
+    
+    Model -- "確率 < 0.23" --> Auto[【自動承認】<br>全体の約85%]
+    Model -- "確率 ≥ 0.23" --> Manual[【2次審査】<br>人間による審査、約15%]
+    
+    Manual --> Pass[承認]
+    Manual --> Reject[却下]
+
+    style Start fill:#f9f,stroke:#333,stroke-width:2px
+    style Auto fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
+    style Reject fill:#ff9,stroke:#f66,stroke-width:2px
 1次審査通過者  
 　　│  
 　　▼  
