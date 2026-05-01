@@ -102,6 +102,7 @@
 
 ## 7. デプロイ構成、実行方法  
 【構成】  
+<pre>
  GitHub → GitHub Actions → ECR → Lambda ← S3(モデル)  
  　　　　　　　　　　　　　　　　　　　↓  
  　　　　　　　　　　　　　　　　API Gateway → レスポンス(JSON)  
@@ -118,6 +119,7 @@
       "decision": "auto_approve",  
       "features_received": 2  
     }  
+</pre>
 
 ※APIの制約事項  
 ・現在のAPIはFE済みデータ（669特徴量）を入力とするデモ版であり、生の申請データからの推論には対応していない  
