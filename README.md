@@ -33,19 +33,7 @@
 <br>
 
 ## 3.ビジネスプラン：審査最適化の設計  
-【業務処理フロー】  
-graph TD
-    Start[申請受付] --> Model{モデルスコアリング<br>予測確率算出}
-    
-    Model -- "確率 < 0.23" --> Auto[【自動承認】<br>全体の約85%]
-    Model -- "確率 ≥ 0.23" --> Manual[【2次審査】<br>人間による審査、約15%]
-    
-    Manual --> Pass[承認]
-    Manual --> Reject[却下]
-
-    style Start fill:#f9f,stroke:#333,stroke-width:2px
-    style Auto fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
-    style Reject fill:#ff9,stroke:#f66,stroke-width:2px
+<pre>
 1次審査通過者  
 　　│  
 　　▼  
@@ -57,6 +45,7 @@ graph TD
 　　　　　　　　　　　　　　　　　│  
 　　　　　　　　　　　　　　　　　├─ 承認  
 　　　　　　　　　　　　　　　　　└─ 却下  
+</pre>
 ※補足  
 ・起点を「1次審査通過者」とする理由：本データは融資実行済みの顧客のみで構成されており、審査段階で却下された申請を含まない（サバイバーシップバイアス）。モデルの適用範囲は1次審査を通過した申請者に限定される。  
 ・閾値 0.23 の選定根拠  
