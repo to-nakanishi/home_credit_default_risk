@@ -76,8 +76,8 @@
 
   2.モデル導入時
      = TN（正しく承認した正常顧客）の融資額 × 利益率(0.1)
-      − FN（見逃しデフォルト）の融資額 × LGD(0.6)
-      − (TP + FP)*1000(審査コスト)
+　　　　− FN（見逃しデフォルト）の融資額 × LGD(0.6)
+　　　　− (TP + FP)*1000(審査コスト)
   3.純改善額 = モデル導入時 − ベースライン
 
 【パラメータ設定】 
@@ -128,8 +128,7 @@ EXT_SOURCE系の特徴量が最も強い予測力を持つ。
 一方で平均値は他特徴量との相互作用の影響が強く、
 モデル（LGBM / CatBoost）間で寄与の差が見られた。
 → 特徴量の単独性能と相互作用依存の違いが確認できた。 
- <img src="https://github.com/user-attachments/assets/77d20695-b2ce-4828-9bd6-f1bc304f5108">  
- <img src="https://github.com/user-attachments/assets/2ef6b484-ad2e-4923-9c79-161ce5d8f184">  
+ <img src="https://github.com/user-attachments/assets/77d20695-b2ce-4828-9bd6-f1bc304f5108">   <img src="https://github.com/user-attachments/assets/2ef6b484-ad2e-4923-9c79-161ce5d8f184">  
 
 <br>
 
