@@ -36,7 +36,7 @@
 　　　　　　　　　　　　　　　　　├─ 承認  
 　　　　　　　　　　　　　　　　　└─ 却下  
 </pre>
-
+【閾値感度グラフ】
 <img src="https://github.com/user-attachments/assets/518a8dd8-67d6-4008-af86-b94e755c6288" width="950">
 
 【最適な閾値、正常プレシジョン】  
