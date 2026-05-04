@@ -132,7 +132,6 @@ EXT_SOURCE系の特徴量が最も強い予測力を持つ。
   <img src="https://github.com/user-attachments/assets/77d20695-b2ce-4828-9bd6-f1bc304f5108" width="45%">
   <img src="https://github.com/user-attachments/assets/2ef6b484-ad2e-4923-9c79-161ce5d8f184" width="45%">
 </p>
- <img src="https://github.com/user-attachments/assets/77d20695-b2ce-4828-9bd6-f1bc304f5108">   <img src="https://github.com/user-attachments/assets/2ef6b484-ad2e-4923-9c79-161ce5d8f184">  
 
 <br>
 
