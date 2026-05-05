@@ -117,8 +117,9 @@ LGD = 0.60　　　　　　　　　　　 # デフォルト時の損失率（6
 1.EDA・FE全体  
 　-寄与度の高い特徴量(EXT_SOURCE)同士は情報が重複し、合成しても精度向上に繋がらない場合がある。  
    またカテゴリ型の特徴量の組み合わせでは細分化しやすく、サンプル不足による過学習を招くため、Coverage（被覆率）の確認が必要。  
+<br>
 【寄与度】
- <img src="https://github.com/user-attachments/assets/7642bbbf-f062-4219-8081-80feb4b879d4" width="900">  
+ <img src="https://github.com/user-attachments/assets/7642bbbf-f062-4219-8081-80feb4b879d4" width="800">  
 2.追加特徴量  
 【FE1で追加した特徴量】  
 　EXT_SOURCE系の特徴量が最も強い予測力を持つ。特に幾何平均（EXT_SOURCES_GEOM_MEAN）はSHAP値のレンジが広く、単独で強い判別力を持つ。  
