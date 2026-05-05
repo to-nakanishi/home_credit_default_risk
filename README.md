@@ -121,7 +121,9 @@ LGD = 0.60　　　　　　　　　　　 # デフォルト時の損失率（6
 　EXT_SOURCE系の特徴量が最も強い予測力を持つ。特に幾何平均（EXT_SOURCES_GEOM_MEAN）はSHAP値のレンジが広く、単独で強い判別力を持つ。  
 　一方で平均値は他特徴量との相互作用の影響が強く、モデル（LGBM / CatBoost）間で寄与の差が見られ、     
 　特徴量の単独性能と相互作用依存の違いが確認できた。 
+ 
  <br>
+ 
  【SHAP値】
 <p align="center">
   <img src="https://github.com/user-attachments/assets/77d20695-b2ce-4828-9bd6-f1bc304f5108" width="45%">
