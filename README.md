@@ -1,5 +1,3 @@
-# 作成中
-
 # home_credit_default_risk: ローン申請の大規模データにおける債務不履行予測モデルの構築と審査最適化
 🔗 [Kaggle Competition Link](https://www.kaggle.com/c/home-credit-default-risk)
 
@@ -118,12 +116,12 @@ LGD = 0.60　　　　　　　　　　　 # デフォルト時の損失率（6
 
 1.EDA・FE全体  
 　-寄与度の高い特徴量(EXT_SOURCE)同士は情報が重複し、合成しても精度向上に繋がらない場合がある。  
- またカテゴリ型の特徴量の組み合わせでは細分化しやすく、サンプル不足による過学習を招くため、Coverage（被覆率）の確認が必要。  
+ またカテゴリ型の特徴量の組み合わせでは細分化しやすく、サンプル不足による過学習を招くため、Coverage（被覆率）の確認が必要。
+ <img src="https://github.com/user-attachments/assets/7642bbbf-f062-4219-8081-80feb4b879d4" />
+" width="950">
 2.追加特徴量  
 【FE1で追加した特徴量】  
-　EXT_SOURCE系の特徴量が最も強い予測力を持つ。特に幾何平均（EXT_SOURCES_GEOM_MEAN）は、  
-　・単調にリスクを低減する関係を持つ  
-　・SHAP値のレンジが広く、単独で強い判別力を持つ  
+　EXT_SOURCE系の特徴量が最も強い予測力を持つ。特に幾何平均（EXT_SOURCES_GEOM_MEAN）はSHAP値のレンジが広く、単独で強い判別力を持つ。  
 　一方で平均値は他特徴量との相互作用の影響が強く、モデル（LGBM / CatBoost）間で寄与の差が見られ、   
 　 特徴量の単独性能と相互作用依存の違いが確認できた。   
 <p align="center">
