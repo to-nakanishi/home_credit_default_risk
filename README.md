@@ -153,7 +153,7 @@ LGD = 0.60　　　　　　　　　　　 # デフォルト時の損失率（6
 <br>
 
 ## 6. 試験的デプロイ構成、実行方法  
-デモ版としてLGBM単体で推論可能。本番想定ではStep Functionsによる前処理パイプライン統合を設計済み<br>
+デモ版としてLGBM単体で推論可能。<br>
 【構成】  
 <pre>
  GitHub → GitHub Actions → ECR → Lambda ← S3(モデル)  
