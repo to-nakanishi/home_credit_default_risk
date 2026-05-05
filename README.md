@@ -130,7 +130,8 @@ LGD = 0.60　　　　　　　　　　　 # デフォルト時の損失率（6
   <img src="https://github.com/user-attachments/assets/2ef6b484-ad2e-4923-9c79-161ce5d8f184" width="45%">
 </p>
 <br>
-【寄与度】  
+【寄与度】<br>
+
  <img src="https://github.com/user-attachments/assets/0141931c-a6b3-4989-a842-8b0709bf8d37" width="800">  
  <br>
  
