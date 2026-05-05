@@ -114,15 +114,7 @@ LGD = 0.60　　　　　　　　　　　 # デフォルト時の損失率（6
 
 ## 5.主な発見と学び
 
-1.EDA・FE全体  
-　-寄与度の高い特徴量(EXT_SOURCE)同士は情報が重複し、合成しても精度向上に繋がらない場合がある。  
-   またカテゴリ型の特徴量の組み合わせでは細分化しやすく、サンプル不足による過学習を招くため、Coverage（被覆率）の確認が必要。  
-<br>
-【寄与度】  
-
- <img src="https://github.com/user-attachments/assets/7642bbbf-f062-4219-8081-80feb4b879d4" width="800">  
- 
-2.追加特徴量  
+1.追加特徴量  
 【FE1で追加した特徴量】  
 　EXT_SOURCE系の特徴量が最も強い予測力を持つ。特に幾何平均（EXT_SOURCES_GEOM_MEAN）はSHAP値のレンジが広く、単独で強い判別力を持つ。  
 　一方で平均値は他特徴量との相互作用の影響が強く、モデル（LGBM / CatBoost）間で寄与の差が見られ、   
@@ -131,7 +123,6 @@ LGD = 0.60　　　　　　　　　　　 # デフォルト時の損失率（6
   <img src="https://github.com/user-attachments/assets/77d20695-b2ce-4828-9bd6-f1bc304f5108" width="45%">
   <img src="https://github.com/user-attachments/assets/2ef6b484-ad2e-4923-9c79-161ce5d8f184" width="45%">
 </p>
-
 <br>
 
 【FE2で追加した特徴量のうち寄与度1%以上】  
@@ -142,6 +133,15 @@ LGD = 0.60　　　　　　　　　　　 # デフォルト時の損失率（6
   それぞれを単純結合しただけでは細分化による過学習となるが、デフォルト率を用いて加工することで有効な特徴として組込みやすくなった。  
 ・DIFF_GOODS_CREDIT(商品価格-借入額) 1.61%(FE2追加後の試走)  
 　商品の本体価格以外の付随費用の可能性もあるが、差額が大きいものは商品購入自体が目的ではない可能性も考えられうる。  
+ 
+2.EDA・FE全体  
+　-寄与度の高い特徴量(EXT_SOURCE)同士は情報が重複し、合成しても精度向上に繋がらない場合がある。  
+   またカテゴリ型の特徴量の組み合わせでは細分化しやすく、サンプル不足による過学習を招くため、Coverage（被覆率）の確認が必要。  
+<br>
+【寄与度】  
+
+ <img src="https://github.com/user-attachments/assets/7642bbbf-f062-4219-8081-80feb4b879d4" width="800">  
+ 
 3.技法・検討方法  
 　-ハイパーパラメータチューニング(Optuna)、SHAP、Target Encoding、リーク対策(Out-of-Fold＋Smoothing)、試験的デプロイ導入  
 
