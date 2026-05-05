@@ -1,5 +1,5 @@
 # Home Credit Default Risk: 債務不履行予測と審査閾値最適化
-🔗 [Kaggle Competition Link](https://www.kaggle.com/c/home-credit-default-risk)
+🔗 [Kaggle Competition Link](https://www.kaggle.com/c/home-credit-default-risk)  
 **Ensemble AUC 0.794（Private LB上位15%）、閾値最適化により利益改善率+22.3%**
 <br>
 
