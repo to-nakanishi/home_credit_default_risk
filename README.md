@@ -119,8 +119,8 @@ LGD = 0.60　　　　　　　　　　　 # デフォルト時の損失率（6
 1.追加特徴量  
 【FE1で追加した特徴量】  
 　EXT_SOURCE系の特徴量が最も強い予測力を持つ。特に幾何平均（EXT_SOURCES_GEOM_MEAN）はSHAP値のレンジが広く、単独で強い判別力を持つ。  
-　一方で平均値は他特徴量との相互作用の影響が強く、モデル（LGBM / CatBoost）間で寄与の差が見られ、   
-　 特徴量の単独性能と相互作用依存の違いが確認できた。   
+　一方で平均値は他特徴量との相互作用の影響が強く、モデル（LGBM / CatBoost）間で寄与の差が見られ、     
+　特徴量の単独性能と相互作用依存の違いが確認できた。   
 <p align="center">
   <img src="https://github.com/user-attachments/assets/77d20695-b2ce-4828-9bd6-f1bc304f5108" width="45%">
   <img src="https://github.com/user-attachments/assets/2ef6b484-ad2e-4923-9c79-161ce5d8f184" width="45%">
